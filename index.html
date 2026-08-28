@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yıldız&Şahin — Hukuk Bürosu</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bordo:#6E1E2C; --bordo-dark:#54121E;
+  --yesil:#1F4A3B; --yesil-dark:#143026;
+  --krem:#F6F1E7; --krem-2:#EFE7D6;
+  --ink:#2A211C; --muted:#6B5F55; --line:#E0D5C0;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Inter",system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--krem);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--yesil);margin-bottom:.6rem;display:block}
+
+.slider{position:relative;width:100%;aspect-ratio:12/5;overflow:hidden;background:var(--ink)}
+.slides{display:flex;height:100%;transition:transform .6s ease}
+.slides img{min-width:100%;height:100%;object-fit:cover}
+.slider-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.35);
+  color:#fff;border:0;width:46px;height:46px;font-size:1.6rem;cursor:pointer;border-radius:50%;
+  transition:.2s;display:grid;place-items:center}
+.slider-nav:hover{background:var(--bordo)}
+.slider-nav.prev{left:20px} .slider-nav.next{right:20px}
+.slider-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px}
+.slider-dots button{width:11px;height:11px;border-radius:50%;border:0;background:rgba(255,255,255,.5);cursor:pointer;padding:0}
+.slider-dots button.active{background:var(--bordo)}
+
+header{position:sticky;top:0;z-index:50;background:rgba(246,241,231,.45);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .mark{width:56px;height:56px;border-radius:50%;flex:none;background:var(--bordo);
+  color:#fff;display:grid;place-items:center;font-family:var(--serif);font-size:1.3rem;
+  font-weight:700;border:2px solid var(--yesil);object-fit:cover}
+.brand b{font-family:var(--serif);font-size:1.35rem;font-weight:600}
+.brand span span{display:block;font-family:var(--sans);font-size:.62rem;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--yesil)}
+.nav-right{display:flex;align-items:center;gap:22px}
+nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;align-items:center}
+nav a{font-size:.9rem;font-weight:500;position:relative;padding:4px 0}
+nav a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--bordo);transition:width .25s}
+nav a:hover::after{width:100%}
+.nav-cta{background:var(--bordo);color:#fff!important;padding:9px 18px;border-radius:2px;font-weight:600}
+.nav-cta::after{display:none}
+.nav-cta:hover{background:var(--bordo-dark)}
+.lang-switch{display:flex;gap:2px;border:1px solid var(--line);border-radius:3px;overflow:hidden;flex:none}
+.lang-switch button{background:#fff;border:0;padding:7px 11px;font-size:.78rem;font-weight:600;
+  letter-spacing:.05em;color:var(--muted);cursor:pointer;transition:.15s}
+.lang-switch button:hover{background:var(--krem-2)}
+.lang-switch button.active{background:var(--bordo);color:#fff}
+.burger{display:none;background:none;border:0;font-size:1.5rem;color:var(--bordo);cursor:pointer}
+
+.hero{position:relative;background:linear-gradient(180deg,rgba(84,18,30,.86),rgba(20,48,38,.9)),var(--yesil-dark);
+  color:var(--krem);overflow:hidden}
+.hero .wrap{padding:110px 24px 120px;position:relative;z-index:2}
+.hero .eyebrow{color:#E9C9A0}
+.hero h1{font-size:clamp(2.4rem,5vw,4rem);max-width:16ch;font-weight:600}
+.hero .quote{margin-top:26px;max-width:60ch;font-family:var(--serif);font-size:1.5rem;
+  font-style:italic;color:#F0E7D6;line-height:1.4}
+.hero .attrib{margin-top:12px;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:#E9C9A0}
+.hero-actions{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:2px;
+  font-weight:600;font-size:.92rem;cursor:pointer;border:1px solid transparent;transition:.2s}
+.btn-primary{background:var(--krem);color:var(--bordo)}
+.btn-primary:hover{background:#fff}
+.btn-ghost{border-color:rgba(255,255,255,.5);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.hero-rule{position:absolute;right:-60px;top:-60px;width:340px;height:340px;
+  border:1px solid rgba(233,201,160,.3);border-radius:50%;z-index:1}
+.hero-rule.two{width:220px;height:220px;right:20px;top:20px;border-color:rgba(233,201,160,.2)}
+
+section{padding:88px 0}
+.sec-head{max-width:60ch;margin-bottom:48px}
+.sec-head h2{font-size:clamp(1.9rem,3.5vw,2.7rem)}
+.sec-head p{color:var(--muted);margin-top:12px}
+
+#hakkimizda{background:var(--krem-2)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.about .photo{aspect-ratio:4/5;background:repeating-linear-gradient(45deg,#e7dcc6 0 12px,#e2d4ba 12px 24px);
+  border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);font-size:.85rem;text-align:center;padding:20px}
+.about h2{font-size:clamp(1.9rem,3.5vw,2.7rem);margin-bottom:8px}
+.about .lead{font-family:var(--serif);font-size:1.35rem;color:var(--bordo);margin:0 0 18px}
+.about p{color:var(--muted)}
+.about ul{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:10px}
+.about li{padding-left:24px;position:relative}
+.about li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:10px;background:var(--yesil);transform:rotate(45deg)}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:#fff;border:1px solid var(--line);padding:30px 26px;position:relative;transition:.25s;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:var(--bordo);
+  transform:scaleY(0);transform-origin:top;transition:.3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(84,18,30,.4)}
+.card:hover::before{transform:scaleY(1)}
+.card .no{font-family:var(--serif);font-size:1rem;color:var(--yesil);font-weight:700}
+.card h3{font-size:1.4rem;margin:8px 0 12px}
+.card p{color:var(--muted);font-size:.93rem;margin:0}
+
+#istatistik{background:var(--bordo);color:var(--krem)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat .num{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:#F0E7D6}
+.stat .lbl{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#E9C9A0;margin-top:4px}
+
+#takim{background:var(--krem-2)}
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.member{background:#fff;border:1px solid var(--line);cursor:pointer;transition:.25s}
+.member:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(84,18,30,.4)}
+.member .avatar{aspect-ratio:3/4;background:linear-gradient(160deg,var(--yesil),var(--yesil-dark));
+  display:grid;place-items:center;color:rgba(255,255,255,.6);font-size:.8rem}
+.member .info{padding:18px 18px 22px;text-align:center}
+.member h3{font-size:1.25rem}
+.member .role{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bordo)}
+.member .cv-link{display:block;margin-top:10px;font-size:.78rem;font-weight:600;color:var(--yesil)}
+
+/* Özgeçmiş modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(20,20,20,.6);backdrop-filter:blur(3px);
+  display:none;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.modal-box{background:var(--krem);max-width:720px;width:100%;max-height:88vh;overflow-y:auto;
+  border-radius:6px;position:relative;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:0;font-size:1.9rem;
+  line-height:1;color:var(--muted);cursor:pointer}
+.modal-close:hover{color:var(--bordo)}
+.modal-head{display:flex;gap:22px;align-items:center;padding:32px 32px 20px;border-bottom:1px solid var(--line)}
+.modal-head img{width:110px;height:140px;object-fit:cover;border:1px solid var(--line);flex:none;background:var(--krem-2)}
+.modal-head h3{font-size:1.7rem}
+.modal-head .role{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bordo);margin-top:4px}
+.modal-body{padding:24px 32px 34px}
+.modal-body h4{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--yesil);margin:22px 0 8px}
+.modal-body h4:first-child{margin-top:0}
+.modal-body p,.modal-body li{color:var(--muted);font-size:.95rem}
+.modal-body ul{margin:0;padding-left:20px;display:grid;gap:6px}
+
+#avukata-sor{background:linear-gradient(180deg,var(--yesil-dark),var(--yesil));color:var(--krem)}
+#avukata-sor .eyebrow{color:#E9C9A0}
+#avukata-sor .sec-head h2{color:#fff}
+#avukata-sor .sec-head p{color:#D8E3DC}
+.chat{max-width:760px;margin:0 auto;background:var(--krem);color:var(--ink);border-radius:4px;
+  overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+.chat-head{background:var(--bordo);color:#fff;padding:16px 22px;display:flex;align-items:center;gap:12px}
+.chat-head .dot{width:10px;height:10px;border-radius:50%;background:#8CD9B0;flex:none}
+.chat-head b{font-family:var(--serif);font-size:1.2rem;font-weight:600}
+.chat-log{padding:22px;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+.msg{max-width:80%;padding:12px 16px;border-radius:12px;font-size:.94rem;line-height:1.55;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--bordo);color:#fff;border-bottom-right-radius:3px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:3px}
+.msg.system{align-self:center;background:transparent;color:var(--muted);font-size:.82rem;text-align:center;max-width:100%}
+.chat-input{display:flex;gap:10px;padding:16px 18px;border-top:1px solid var(--line);background:#fff}
+.chat-input textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:4px;padding:11px 14px;
+  font-family:var(--sans);font-size:.94rem;line-height:1.4;max-height:120px;outline:none}
+.chat-input textarea:focus{border-color:var(--yesil)}
+.chat-input button{background:var(--yesil);color:#fff;border:0;border-radius:4px;padding:0 22px;
+  font-weight:600;cursor:pointer;font-size:.92rem;transition:.2s}
+.chat-input button:hover{background:var(--yesil-dark)}
+.chat-input button:disabled{opacity:.5;cursor:not-allowed}
+.disclaimer{max-width:760px;margin:16px auto 0;text-align:center;font-size:.78rem;color:#CFE0D6}
+
+#iletisim{background:var(--krem)}
+.contact{display:grid;grid-template-columns:1.1fr 1fr;gap:48px}
+.contact-info{display:grid;gap:26px;align-content:start}
+.ci-item .k{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--yesil);font-weight:600;margin-bottom:4px}
+.ci-item .v{font-family:var(--serif);font-size:1.3rem;color:var(--ink)}
+.map{background:var(--krem-2);border:1px dashed var(--line);border-radius:4px;display:grid;
+  place-items:center;color:var(--muted);min-height:280px;text-align:center;padding:20px}
+
+footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot .brand b{color:#fff}
+.foot small{color:#9A8E82;font-size:.82rem}
+
+@media(max-width:900px){
+  .about,.contact{grid-template-columns:1fr;gap:32px}
+  .grid,.team,.stats{grid-template-columns:repeat(2,1fr)}
+  nav ul{display:none} .burger{display:block}
+}
+@media(max-width:560px){
+  .grid,.team,.stats{grid-template-columns:1fr}
+  section{padding:64px 0} .hero .wrap{padding:80px 24px 88px}
+  .modal-head{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#">
+      <img class="mark" src="img/yasin_sahin_hukuk_amblemi1.jpeg" alt="Logo">
+      <span><b>YILDIZ&ŞAHİN</b><span data-i18n="brand_sub">Hukuk Bürosu</span></span>
+    </a>
+    <div class="nav-right">
+      <nav>
+        <ul>
+          <li><a href="#hakkimizda" data-i18n="nav_about">Hakkımızda</a></li>
+          <li><a href="#alanlar" data-i18n="nav_areas">Çalışma Alanları</a></li>
+          <li><a href="#takim" data-i18n="nav_team">Takımımız</a></li>
+          <li><a href="#iletisim" data-i18n="nav_contact">İletişim</a></li>
+          <li><a class="nav-cta" href="#avukata-sor" data-i18n="nav_ask">Avukata Sor</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch">
+        <button data-lang="tr" class="active" onclick="setLang('tr')">TR</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="ru" onclick="setLang('ru')">RU</button>
+      </div>
+    </div>
+    <button class="burger" onclick="document.querySelector('nav ul').scrollIntoView()">☰</button>
+  </div>
+</header>
+
+<div class="slider" id="slider">
+  <div class="slides">
+    <img src="img/1.jpg" alt="1">
+    <img src="img/2.jpg" alt="2">
+    <img src="img/3.jpg" alt="3">
+  </div>
+  <button class="slider-nav prev" onclick="moveSlide(-1)">‹</button>
+  <button class="slider-nav next" onclick="moveSlide(1)">›</button>
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<section class="hero" style="padding:0">
+  <div class="hero-rule"></div>
+  <div class="hero-rule two"></div>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="hero_eyebrow">Alanya · Hukuk Bürosu</span>
+    <h1 data-i18n="hero_title">Adalet İçin Güçlü Çözüm, Güvenilir Hukuk</h1>
+    <p class="quote" data-i18n="hero_quote">“Hakkın olduğu yerde, adaletin yanında.”</p>
+    <p class="attrib">— Av. Ahmet Yasin YILDIZ</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#avukata-sor" data-i18n="hero_btn_ask">Avukata Sor</a>
+      <a class="btn btn-ghost" href="#iletisim" data-i18n="hero_btn_appt">Randevu Al</a>
+    </div>
+  </div>
+</section>
+
+<section id="hakkimizda">
+  <div class="wrap about">
+    <div class="photo"><img src="img/anaekran1.jpg" alt="Büro" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="photo"><img src="img/anaekran2.jpg" alt="Büro" style="width:100%;height:100%;object-fit:cover"></div>
+    <div>
+      <span class="eyebrow" data-i18n="about_eyebrow">Hakkımızda</span>
+      <h2 data-i18n="about_title">YILDIZ Hukuk Bürosu</h2>
+      <p class="lead" data-i18n="about_lead">Hukuk büromuz, müvekkillerimizin hak ve menfaatlerini gözeterek güvenilir, çözüm odaklı ve etkin hukuki hizmet sunmayı amaçlamaktadır.</p>
+      <p data-i18n="about_p">Hukuk büromuz, hukukun üstünlüğü ve adalet ilkeleri doğrultusunda, müvekkillerine güvenilir ve nitelikli hukuki hizmet sunmak amacıyla kurulmuştur. Deneyim, bilgi birikimi ve güncel hukuk anlayışını bir araya getirerek her dosyaya titizlikle yaklaşmakta; müvekkillerimizin ihtiyaçlarını doğru analiz ederek etkili ve çözüm odaklı hukuki yollar geliştirmekteyiz. Şeffaf iletişim, güven ve mesleki etik ilkelerini temel alarak uzun vadeli ve sağlam bir vekâlet ilişkisi kurmayı hedefliyoruz.</p>
+      <ul>
+        <li data-i18n="about_li1">Güvenilirlik</li>
+        <li data-i18n="about_li2">Deneyim</li>
+        <li data-i18n="about_li3">Uzmanlık</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="alanlar">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="areas_eyebrow">Uzmanlık</span>
+      <h2 data-i18n="areas_title">Çalışma Alanları</h2>
+      <p data-i18n="areas_intro">Ceza, aile, iş, ticaret, gayrimenkul, miras, icra ve sözleşmeler hukuku alanlarında hukuki danışmanlık ve avukatlık hizmetleri sunuyoruz.</p>
+    </div>
+    <div class="grid">
+      <article class="card"><span class="no">01</span><h3 data-i18n="area1_t">Ceza Hukuku</h3><p data-i18n="area1_d">Soruşturma ve kovuşturma aşamalarında müvekkillerin savunmasını titizlikle üstlenir, hak kayıplarını önleriz.</p></article>
+      <article class="card"><span class="no">02</span><h3 data-i18n="area2_t">Aile Hukuku</h3><p data-i18n="area2_d">Boşanma, nafaka, velayet ve mal paylaşımı süreçlerinde hukuki danışmanlık ve dava takibi sağlarız.</p></article>
+      <article class="card"><span class="no">03</span><h3 data-i18n="area3_t">İş Hukuku</h3><p data-i18n="area3_d">İşçi–işveren uyuşmazlıkları, kıdem–ihbar tazminatı ve işe iade davalarında etkin çözümler sunarız.</p></article>
+      <article class="card"><span class="no">04</span><h3 data-i18n="area4_t">Ticaret Hukuku</h3><p data-i18n="area4_d">Şirketler, sözleşmeler ve ticari uyuşmazlıklarda kurumsal ve bireysel müvekkillere hizmet veririz.</p></article>
+      <article class="card"><span class="no">05</span><h3 data-i18n="area5_t">Gayrimenkul Hukuku</h3><p data-i18n="area5_d">Tapu, kira, kat mülkiyeti ve gayrimenkul uyuşmazlıklarında hukuki güvence sağlarız.</p></article>
+      <article class="card"><span class="no">06</span><h3 data-i18n="area6_t">Miras Hukuku</h3><p data-i18n="area6_d">Mirasın paylaşımı, veraset, tenkis ve mirasçılık davalarında haklarınızı koruruz.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="istatistik">
+  <div class="wrap stats">
+    <div class="stat"><div class="num">10+</div><div class="lbl" data-i18n="stat1_l">Yıllık Deneyim</div></div>
+    <div class="stat"><div class="num">500+</div><div class="lbl" data-i18n="stat2_l">Sonuçlanan Dosya</div></div>
+    <div class="stat"><div class="num">350+</div><div class="lbl" data-i18n="stat3_l">Mutlu Müvekkil</div></div>
+    <div class="stat"><div class="num">8</div><div class="lbl" data-i18n="stat4_l">Uzmanlık Alanı</div></div>
+  </div>
+</section>
+
+<section id="takim">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="team_eyebrow">Ekip</span>
+      <h2 data-i18n="team_title">Takımımız</h2>
+      <p data-i18n="team_intro">Alanında uzman, deneyimli avukatlardan oluşan ekibimiz; her dosyaya özen ve titizlikle yaklaşır, müvekkillerimizin haklarını kararlılıkla savunur.</p>
+    </div>
+    <div class="team">
+      <div class="member" onclick="openCV('cv-yasin','Ahmet Yasin Yıldız','img/yasin.jpg')">
+        <div class="avatar"><img src="img/yasin.jpg" alt="Ahmet Yasin Yıldız" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="info"><h3>Ahmet Yasin Yıldız</h3><span class="role" data-i18n="role_lawyer">Avukat</span><span class="cv-link" data-i18n="cv_view">Özgeçmişi Gör →</span></div>
+      </div>
+      <div class="member" onclick="openCV('cv-berkant','Kemal Berkant Şahin','img/berkant.jpg')">
+        <div class="avatar"><img src="img/berkant.jpg" alt="Kemal Berkant Şahin" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="info"><h3>Kemal Berkant Şahin</h3><span class="role" data-i18n="role_lawyer">Avukat</span><span class="cv-link" data-i18n="cv_view">Özgeçmişi Gör →</span></div>
+      </div>
+      <div class="member" onclick="openCV('cv-ozge','Özge Seren Sürgit','img/ozge.jpg')">
+        <div class="avatar"><img src="img/ozge.jpg" alt="Özge Seren Sürgit" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="info"><h3>Özge Seren Sürgit</h3><span class="role" data-i18n="role_lawyer">Avukat</span><span class="cv-link" data-i18n="cv_view">Özgeçmişi Gör →</span></div>
+      </div>
+      <div class="member" onclick="openCV('cv-ceren','Ceren Sürgit Yıldız','img/ceren.jpg')">
+        <div class="avatar">[ Fotoğraf ]</div>
+        <div class="info"><h3>Ceren Sürgit Yıldız</h3><span class="role" data-i18n="role_lawyer">Avukat</span><span class="cv-link" data-i18n="cv_view">Özgeçmişi Gör →</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ÖZGEÇMİŞ VERİLERİ (gizli) — içeriği siz doldurun ═══════ -->
+<div style="display:none">
+  <div id="cv-yasin">
+    <h4>Eğitim</h4>
+    <ul><li>[Üniversite / Fakülte — Yıl]</li><li>[Yüksek lisans vb. — Yıl]</li></ul>
+    <h4>Deneyim</h4>
+    <ul><li>[Görev / Kurum — Yıl aralığı]</li><li>[Görev / Kurum — Yıl aralığı]</li></ul>
+    <h4>Uzmanlık Alanları</h4>
+    <p>[Ceza hukuku, aile hukuku vb.]</p>
+    <h4>Diller</h4>
+    <p>[Türkçe, İngilizce vb.]</p>
+    <h4>Baro / Sicil</h4>
+    <p>[Alanya Barosu — Sicil No: ...]</p>
+  </div>
+  <div id="cv-berkant">
+    <h4>Eğitim</h4>
+    <ul><li>[Üniversite / Fakülte — Yıl]</li></ul>
+    <h4>Deneyim</h4>
+    <ul><li>[Görev / Kurum — Yıl aralığı]</li></ul>
+    <h4>Uzmanlık Alanları</h4>
+    <p>[...]</p>
+    <h4>Diller</h4>
+    <p>[...]</p>
+    <h4>Baro / Sicil</h4>
+    <p>[...]</p>
+  </div>
+  <div id="cv-ozge">
+    <h4>Eğitim</h4>
+    <ul><li>[Üniversite / Fakülte — Yıl]</li></ul>
+    <h4>Deneyim</h4>
+    <ul><li>[Görev / Kurum — Yıl aralığı]</li></ul>
+    <h4>Uzmanlık Alanları</h4>
+    <p>[...]</p>
+    <h4>Diller</h4>
+    <p>[...]</p>
+    <h4>Baro / Sicil</h4>
+    <p>[...]</p>
+  </div>
+  <div id="cv-ceren">
+    <h4>Eğitim</h4>
+    <ul><li>[Üniversite / Fakülte — Yıl]</li></ul>
+    <h4>Deneyim</h4>
+    <ul><li>[Görev / Kurum — Yıl aralığı]</li></ul>
+    <h4>Uzmanlık Alanları</h4>
+    <p>[...]</p>
+    <h4>Diller</h4>
+    <p>[...]</p>
+    <h4>Baro / Sicil</h4>
+    <p>[...]</p>
+  </div>
+</div>
+
+<!-- ═══════ ÖZGEÇMİŞ MODAL ═══════ -->
+<div class="modal" id="cvModal" onclick="if(event.target===this)closeCV()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeCV()" aria-label="Kapat">×</button>
+    <div class="modal-head">
+      <img id="cvPhoto" src="" alt="">
+      <div>
+        <h3 id="cvName"></h3>
+        <div class="role" data-i18n="role_lawyer">Avukat</div>
+      </div>
+    </div>
+    <div class="modal-body" id="cvBody"></div>
+  </div>
+</div>
+
+<section id="avukata-sor">
+  <div class="wrap">
+    <div class="sec-head" style="margin:0 auto 40px;text-align:center">
+      <span class="eyebrow" data-i18n="ask_eyebrow">Yapay Zekâ Destekli</span>
+      <h2 data-i18n="ask_title">Avukata Sor</h2>
+      <p data-i18n="ask_intro">Hukuki sorunuzu yazın, yapay zekâ asistanımız genel bilgi versin.</p>
+    </div>
+
+    <div class="chat">
+      <div class="chat-head"><span class="dot"></span><b data-i18n="chat_head">Hukuk Asistanı</b></div>
+      <div class="chat-log" id="chatLog">
+        <div class="msg bot" data-i18n="chat_greeting">Merhaba, ben Yıldız&Şahin yapay zekâ asistanıyım. Hukuki konunuzu kısaca yazın, size genel bilgi vereyim.</div>
+      </div>
+      <div class="chat-input">
+        <textarea id="chatInput" rows="1" data-i18n-ph="chat_ph" placeholder="Sorunuzu yazın..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
+        <button id="sendBtn" onclick="sendMessage()" data-i18n="chat_send">Gönder</button>
+      </div>
+    </div>
+    <p class="disclaimer" data-i18n="disclaimer">Bu asistan genel bilgilendirme amaçlıdır ve avukatlık hizmeti / resmî hukuki görüş yerine geçmez. Kesin sonuç için lütfen büromuzla iletişime geçin.</p>
+  </div>
+</section>
+
+<section id="iletisim">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="contact_eyebrow">İletişim</span>
+      <h2 data-i18n="contact_title">Bize Ulaşın</h2>
+    </div>
+    <div class="contact">
+      <div class="contact-info">
+        <div class="ci-item"><div class="k" data-i18n="c_address">Adres</div><div class="v">[Adres buraya gelecek]</div></div>
+        <div class="ci-item"><div class="k" data-i18n="c_phone">Telefon</div><div class="v">[+90 555555555]</div></div>
+        <div class="ci-item"><div class="k" data-i18n="c_email">E-Posta</div><div class="v">iletisim@yildizsahinhukuk.com</div></div>
+        <div class="ci-item"><div class="k" data-i18n="c_hours">Çalışma Saatleri</div><div class="v">[Pzt–Cmt 09:00–18:00]</div></div>
+      </div>
+      <div class="map" style="padding:0;overflow:hidden"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48907.82912696085!2d32.66165129999999!3d39.99193050000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d336e900dc352b%3A0xc60911f02aae1dbc!2sOYAK%20G%C3%B6ksupark!5e0!3m2!1str!2str!4v1787916727683!5m2!1str!2str" style="width:100%;height:100%;border:0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="brand">
+      <span class="mark">[ ]</span>
+      <span><b>Yıldız&Şahin</b><span data-i18n="brand_sub">Hukuk Bürosu</span></span>
+    </div>
+    <small>© <span id="yil"></span> Yıldız&Şahin. <span data-i18n="footer_rights">Tüm hakları saklıdır.</span></small>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   GEMINI AYARLARI — "AVUKATA SOR" BÖLÜMÜ
+   API anahtarınızı aşağıya yazın: https://aistudio.google.com/apikey
+   DİKKAT: Bu sayfa GitHub'da herkese açık olduğundan anahtar görünür.
+   Mutlaka Google AI Studio'da anahtara "HTTP yönlendiren (site) kısıtı"
+   ekleyin ki sadece kendi alan adınızdan çalışsın.
+════════════════════════════════════════════════════════════════ */
+const GEMINI_API_KEY = "BURAYA_API_ANAHTARINIZI_YAZIN";
+const GEMINI_MODEL   = "gemini-2.5-flash";
+const SYSTEM_PROMPT  =
+  "Sen bir Türk hukuk bürosunun yapay zekâ asistanısın. Kullanıcılara Türkçe, " +
+  "anlaşılır ve genel hukuki bilgilendirme yaparsın. Kesin hukuki görüş veya " +
+  "avukatlık hizmeti vermediğini, karmaşık konularda büroyla iletişime geçilmesi " +
+  "gerektiğini uygun yerlerde belirtirsin. Kısa ve net cevap ver.";
+
+const I18N = {
+  tr:{
+    brand_sub:"Hukuk Bürosu",
+    nav_about:"Hakkımızda", nav_areas:"Çalışma Alanları", nav_team:"Takımımız",
+    nav_contact:"İletişim", nav_ask:"Avukata Sor",
+    hero_eyebrow:"Alanya · Hukuk Bürosu",
+    hero_title:"Adalet İçin Güçlü Çözüm, Güvenilir Hukuk",
+    hero_quote:"“Hakkın olduğu yerde, adaletin yanında.”",
+    hero_btn_ask:"Avukata Sor", hero_btn_appt:"Randevu Al",
+    about_eyebrow:"Hakkımızda", about_title:"YILDIZ Hukuk Bürosu",
+    about_lead:"Hukuk büromuz, müvekkillerimizin hak ve menfaatlerini gözeterek güvenilir, çözüm odaklı ve etkin hukuki hizmet sunmayı amaçlamaktadır.",
+    about_p:"Hukuk büromuz, hukukun üstünlüğü ve adalet ilkeleri doğrultusunda, müvekkillerine güvenilir ve nitelikli hukuki hizmet sunmak amacıyla kurulmuştur. Deneyim, bilgi birikimi ve güncel hukuk anlayışını bir araya getirerek her dosyaya titizlikle yaklaşmakta; müvekkillerimizin ihtiyaçlarını doğru analiz ederek etkili ve çözüm odaklı hukuki yollar geliştirmekteyiz. Şeffaf iletişim, güven ve mesleki etik ilkelerini temel alarak uzun vadeli ve sağlam bir vekâlet ilişkisi kurmayı hedefliyoruz.",
+    about_li1:"Güvenilirlik", about_li2:"Deneyim", about_li3:"Uzmanlık",
+    areas_eyebrow:"Uzmanlık", areas_title:"Çalışma Alanları",
+    areas_intro:"Ceza, aile, iş, ticaret, gayrimenkul, miras, icra ve sözleşmeler hukuku alanlarında hukuki danışmanlık ve avukatlık hizmetleri sunuyoruz.",
+    area1_t:"Ceza Hukuku", area1_d:"Soruşturma ve kovuşturma aşamalarında müvekkillerin savunmasını titizlikle üstlenir, hak kayıplarını önleriz.",
+    area2_t:"Aile Hukuku", area2_d:"Boşanma, nafaka, velayet ve mal paylaşımı süreçlerinde hukuki danışmanlık ve dava takibi sağlarız.",
+    area3_t:"İş Hukuku", area3_d:"İşçi–işveren uyuşmazlıkları, kıdem–ihbar tazminatı ve işe iade davalarında etkin çözümler sunarız.",
+    area4_t:"Ticaret Hukuku", area4_d:"Şirketler, sözleşmeler ve ticari uyuşmazlıklarda kurumsal ve bireysel müvekkillere hizmet veririz.",
+    area5_t:"Gayrimenkul Hukuku", area5_d:"Tapu, kira, kat mülkiyeti ve gayrimenkul uyuşmazlıklarında hukuki güvence sağlarız.",
+    area6_t:"Miras Hukuku", area6_d:"Mirasın paylaşımı, veraset, tenkis ve mirasçılık davalarında haklarınızı koruruz.",
+    stat1_l:"Yıllık Deneyim", stat2_l:"Sonuçlanan Dosya", stat3_l:"Mutlu Müvekkil", stat4_l:"Uzmanlık Alanı",
+    team_eyebrow:"Ekip", team_title:"Takımımız",
+    team_intro:"Alanında uzman, deneyimli avukatlardan oluşan ekibimiz; her dosyaya özen ve titizlikle yaklaşır, müvekkillerimizin haklarını kararlılıkla savunur.",
+    role_lawyer:"Avukat", cv_view:"Özgeçmişi Gör →",
+    ask_eyebrow:"Yapay Zekâ Destekli", ask_title:"Avukata Sor",
+    ask_intro:"Hukuki sorunuzu yazın, yapay zekâ asistanımız genel bilgi versin.",
+    chat_head:"Hukuk Asistanı",
+    chat_greeting:"Merhaba, ben Yıldız&Şahin yapay zekâ asistanıyım. Hukuki konunuzu kısaca yazın, size genel bilgi vereyim.",
+    chat_ph:"Sorunuzu yazın...", chat_send:"Gönder",
+    disclaimer:"Bu asistan genel bilgilendirme amaçlıdır ve avukatlık hizmeti / resmî hukuki görüş yerine geçmez. Kesin sonuç için lütfen büromuzla iletişime geçin.",
+    contact_eyebrow:"İletişim", contact_title:"Bize Ulaşın",
+    c_address:"Adres", c_phone:"Telefon", c_email:"E-Posta", c_hours:"Çalışma Saatleri",
+    footer_rights:"Tüm hakları saklıdır."
+  },
+  en:{
+    brand_sub:"Law Firm",
+    nav_about:"About Us", nav_areas:"Practice Areas", nav_team:"Our Team",
+    nav_contact:"Contact", nav_ask:"Ask a Lawyer",
+    hero_eyebrow:"Alanya · Law Firm",
+    hero_title:"Strong Solutions for Justice, Reliable Law",
+    hero_quote:"“Where there is a right, justice stands beside it.”",
+    hero_btn_ask:"Ask a Lawyer", hero_btn_appt:"Book an Appointment",
+    about_eyebrow:"About Us", about_title:"YILDIZ Law Firm",
+    about_lead:"Our firm aims to provide reliable, solution-oriented and effective legal services while always safeguarding our clients' rights and interests.",
+    about_p:"Our law firm was founded to provide clients with reliable and high-quality legal services in line with the rule of law and the principles of justice. Combining experience, knowledge and a contemporary understanding of law, we approach every case with great care; by correctly analysing our clients' needs, we develop effective and solution-oriented legal strategies. Built on transparent communication, trust and professional ethics, we aim to establish a long-term and solid attorney–client relationship.",
+    about_li1:"Reliability", about_li2:"Experience", about_li3:"Expertise",
+    areas_eyebrow:"Expertise", areas_title:"Practice Areas",
+    areas_intro:"We provide legal counsel and advocacy in criminal, family, labour, commercial, real estate, inheritance, enforcement and contract law.",
+    area1_t:"Criminal Law", area1_d:"We diligently defend our clients throughout investigation and prosecution, preventing any loss of rights.",
+    area2_t:"Family Law", area2_d:"We provide legal counsel and litigation in divorce, alimony, custody and property division matters.",
+    area3_t:"Labour Law", area3_d:"We offer effective solutions in employer–employee disputes, severance/notice pay and reinstatement cases.",
+    area4_t:"Commercial Law", area4_d:"We serve corporate and individual clients in company matters, contracts and commercial disputes.",
+    area5_t:"Real Estate Law", area5_d:"We provide legal security in title deeds, leases, condominium ownership and property disputes.",
+    area6_t:"Inheritance Law", area6_d:"We protect your rights in estate division, succession, abatement and heirship cases.",
+    stat1_l:"Years of Experience", stat2_l:"Cases Concluded", stat3_l:"Satisfied Clients", stat4_l:"Practice Areas",
+    team_eyebrow:"Team", team_title:"Our Team",
+    team_intro:"Our team of expert, experienced lawyers approaches every case with care and diligence, defending our clients' rights with determination.",
+    role_lawyer:"Lawyer", cv_view:"View CV →",
+    ask_eyebrow:"AI-Powered", ask_title:"Ask a Lawyer",
+    ask_intro:"Type your legal question and our AI assistant will give general information.",
+    chat_head:"Legal Assistant",
+    chat_greeting:"Hello, I'm the Yıldız&Şahin AI assistant. Briefly describe your legal matter and I'll give you general information.",
+    chat_ph:"Type your question...", chat_send:"Send",
+    disclaimer:"This assistant is for general information only and does not replace legal representation or formal legal advice. For a definitive result, please contact our office.",
+    contact_eyebrow:"Contact", contact_title:"Get in Touch",
+    c_address:"Address", c_phone:"Phone", c_email:"Email", c_hours:"Working Hours",
+    footer_rights:"All rights reserved."
+  },
+  ru:{
+    brand_sub:"Юридическая фирма",
+    nav_about:"О нас", nav_areas:"Области практики", nav_team:"Наша команда",
+    nav_contact:"Контакты", nav_ask:"Спросить юриста",
+    hero_eyebrow:"Аланья · Юридическая фирма",
+    hero_title:"Сильные решения ради справедливости, надёжное право",
+    hero_quote:"«Там, где есть право, рядом — справедливость.»",
+    hero_btn_ask:"Спросить юриста", hero_btn_appt:"Записаться на приём",
+    about_eyebrow:"О нас", about_title:"Юридическая фирма YILDIZ",
+    about_lead:"Наша фирма стремится предоставлять надёжные, ориентированные на результат и эффективные юридические услуги, защищая права и интересы наших клиентов.",
+    about_p:"Наша юридическая фирма была основана для предоставления клиентам надёжных и качественных юридических услуг в соответствии с принципами верховенства права и справедливости. Сочетая опыт, знания и современное понимание права, мы подходим к каждому делу с особой тщательностью; правильно анализируя потребности клиентов, мы разрабатываем эффективные и ориентированные на результат правовые стратегии. Основываясь на прозрачном общении, доверии и профессиональной этике, мы стремимся выстроить долгосрочные и прочные отношения между адвокатом и клиентом.",
+    about_li1:"Надёжность", about_li2:"Опыт", about_li3:"Экспертиза",
+    areas_eyebrow:"Экспертиза", areas_title:"Области практики",
+    areas_intro:"Мы предоставляем юридические консультации и представительство в уголовном, семейном, трудовом, коммерческом, земельном, наследственном, исполнительном и договорном праве.",
+    area1_t:"Уголовное право", area1_d:"Мы тщательно защищаем клиентов на этапах следствия и судебного разбирательства, не допуская потери прав.",
+    area2_t:"Семейное право", area2_d:"Предоставляем консультации и ведение дел по разводам, алиментам, опеке и разделу имущества.",
+    area3_t:"Трудовое право", area3_d:"Предлагаем эффективные решения в спорах работник–работодатель, по выходным пособиям и восстановлению на работе.",
+    area4_t:"Коммерческое право", area4_d:"Обслуживаем корпоративных и частных клиентов по вопросам компаний, договоров и коммерческих споров.",
+    area5_t:"Земельное право", area5_d:"Обеспечиваем юридическую защиту по вопросам права собственности, аренды и имущественных споров.",
+    area6_t:"Наследственное право", area6_d:"Защищаем ваши права при разделе наследства, наследовании и спорах о наследниках.",
+    stat1_l:"Лет опыта", stat2_l:"Завершённых дел", stat3_l:"Довольных клиентов", stat4_l:"Областей практики",
+    team_eyebrow:"Команда", team_title:"Наша команда",
+    team_intro:"Наша команда опытных юристов-экспертов подходит к каждому делу внимательно и тщательно, решительно защищая права наших клиентов.",
+    role_lawyer:"Адвокат", cv_view:"Смотреть резюме →",
+    ask_eyebrow:"На основе ИИ", ask_title:"Спросить юриста",
+    ask_intro:"Напишите свой юридический вопрос, и наш ИИ-ассистент даст общую информацию.",
+    chat_head:"Юридический ассистент",
+    chat_greeting:"Здравствуйте, я ИИ-ассистент Yıldız&Şahin. Кратко опишите ваш юридический вопрос, и я дам общую информацию.",
+    chat_ph:"Введите ваш вопрос...", chat_send:"Отправить",
+    disclaimer:"Этот ассистент предназначен только для общей информации и не заменяет юридического представительства или официальной консультации. Для точного результата обратитесь в наш офис.",
+    contact_eyebrow:"Контакты", contact_title:"Свяжитесь с нами",
+    c_address:"Адрес", c_phone:"Телефон", c_email:"Эл. почта", c_hours:"Часы работы",
+    footer_rights:"Все права защищены."
+  }
+};
+
+function setLang(lang){
+  const dict = I18N[lang] || I18N.tr;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    if(dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const k = el.getAttribute('data-i18n-ph');
+    if(dict[k] !== undefined) el.placeholder = dict[k];
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>
+    b.classList.toggle('active', b.getAttribute('data-lang')===lang));
+  try{ localStorage.setItem('lang', lang); }catch(e){}
+}
+
+/* Özgeçmiş modal */
+function openCV(id,name,photo){
+  document.getElementById('cvName').textContent = name;
+  const ph = document.getElementById('cvPhoto');
+  ph.src = photo; ph.alt = name;
+  document.getElementById('cvBody').innerHTML = document.getElementById(id).innerHTML;
+  document.getElementById('cvModal').classList.add('open');
+}
+function closeCV(){ document.getElementById('cvModal').classList.remove('open'); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeCV(); });
+
+/* Slider */
+let slideIndex = 0;
+const slidesEl = document.querySelector('.slides');
+const totalSlides = slidesEl ? slidesEl.children.length : 0;
+const dotsWrap = document.getElementById('sliderDots');
+for(let i=0;i<totalSlides;i++){
+  const b=document.createElement('button');
+  if(i===0) b.className='active';
+  b.onclick=()=>goToSlide(i);
+  dotsWrap.appendChild(b);
+}
+function renderSlider(){
+  slidesEl.style.transform=`translateX(-${slideIndex*100}%)`;
+  [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active',i===slideIndex));
+}
+function goToSlide(i){ slideIndex=(i+totalSlides)%totalSlides; renderSlider(); }
+function moveSlide(step){ goToSlide(slideIndex+step); }
+if(totalSlides>1) setInterval(()=>moveSlide(1), 5000);
+
+document.getElementById('yil').textContent = new Date().getFullYear();
+
+/* Chat — Gemini'ye doğrudan (tarayıcıdan) */
+const log   = document.getElementById('chatLog');
+const input = document.getElementById('chatInput');
+const btn   = document.getElementById('sendBtn');
+const history = [];
+
+function addMsg(text, cls){
+  const el = document.createElement('div');
+  el.className = 'msg ' + cls;
+  el.textContent = text;
+  log.appendChild(el);
+  log.scrollTop = log.scrollHeight;
+  return el;
+}
+
+input.addEventListener('input', () => {
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+});
+
+async function sendMessage(){
+  const text = input.value.trim();
+  if(!text) return;
+
+  if(GEMINI_API_KEY === "BURAYA_API_ANAHTARINIZI_YAZIN"){
+    addMsg("⚙️ Gemini API anahtarı henüz eklenmemiş. index.html içindeki GEMINI_API_KEY değerini düzenleyin.", "system");
+    return;
+  }
+
+  addMsg(text, 'user');
+  history.push({ role:'user', parts:[{ text }] });
+  input.value=''; input.style.height='auto';
+  btn.disabled = true;
+  const typing = addMsg('...', 'bot');
+
+  try{
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({
+          systemInstruction:{ parts:[{ text: SYSTEM_PROMPT }] },
+          contents: history
+        })
+      }
+    );
+    const data = await res.json();
+    if(data.error){ throw new Error(data.error.message || 'API hatası'); }
+    const reply = data?.candidates?.[0]?.content?.parts?.map(p=>p.text).join('') || 'Yanıt alınamadı.';
+    typing.textContent = reply;
+    history.push({ role:'model', parts:[{ text: reply }] });
+  }catch(err){
+    typing.remove();
+    addMsg('Bir hata oluştu: ' + err.message, 'system');
+  }finally{
+    btn.disabled = false;
+    input.focus();
+  }
+}
+
+let startLang = 'tr';
+try{ startLang = localStorage.getItem('lang') || 'tr'; }catch(e){}
+setLang(startLang);
+</script>
+</body>
+</html>
