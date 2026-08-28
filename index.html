@@ -90,9 +90,9 @@ section{padding:88px 0}
 
 #hakkimizda{background:var(--krem-2)}
 .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.about .photo{aspect-ratio:4/5;background:repeating-linear-gradient(45deg,#e7dcc6 0 12px,#e2d4ba 12px 24px);
-  border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);font-size:.85rem;text-align:center;padding:20px}
-.about h2{font-size:clamp(1.9rem,3.5vw,2.7rem);margin-bottom:8px}
+.about .photo{aspect-ratio:4/5;border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;
+  color:var(--muted);font-size:.85rem;text-align:center}
+  .about h2{font-size:clamp(1.9rem,3.5vw,2.7rem);margin-bottom:8px}
 .about .lead{font-family:var(--serif);font-size:1.35rem;color:var(--bordo);margin:0 0 18px}
 .about p{color:var(--muted)}
 .about ul{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:10px}
@@ -115,7 +115,8 @@ section{padding:88px 0}
 .stat .lbl{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#E9C9A0;margin-top:4px}
 
 #takim{background:var(--krem-2)}
-.team{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.team{display:flex;flex-wrap:wrap;justify-content:center;gap:92px}
+.team .member{width:calc(25% - 17px)}
 .member{background:#fff;border:1px solid var(--line);cursor:pointer;transition:.25s}
 .member:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(84,18,30,.4)}
 .member .avatar{aspect-ratio:3/4;background:linear-gradient(160deg,var(--yesil),var(--yesil-dark));
@@ -145,20 +146,27 @@ section{padding:88px 0}
 .modal-body p,.modal-body li{color:var(--muted);font-size:.95rem}
 .modal-body ul{margin:0;padding-left:20px;display:grid;gap:6px}
 
-#avukata-sor{background:linear-gradient(180deg,var(--yesil-dark),var(--yesil));color:var(--krem)}
-#avukata-sor .eyebrow{color:#E9C9A0}
-#avukata-sor .sec-head h2{color:#fff}
-#avukata-sor .sec-head p{color:#D8E3DC}
+/* Randevu chatbot */
+#randevu{background:linear-gradient(180deg,var(--yesil-dark),var(--yesil));color:var(--krem)}
+#randevu .eyebrow{color:#E9C9A0}
+#randevu .sec-head h2{color:#fff}
+#randevu .sec-head p{color:#D8E3DC}
 .chat{max-width:760px;margin:0 auto;background:var(--krem);color:var(--ink);border-radius:4px;
   overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
 .chat-head{background:var(--bordo);color:#fff;padding:16px 22px;display:flex;align-items:center;gap:12px}
 .chat-head .dot{width:10px;height:10px;border-radius:50%;background:#8CD9B0;flex:none}
 .chat-head b{font-family:var(--serif);font-size:1.2rem;font-weight:600}
-.chat-log{padding:22px;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
-.msg{max-width:80%;padding:12px 16px;border-radius:12px;font-size:.94rem;line-height:1.55;white-space:pre-wrap}
+.chat-log{padding:22px;height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+.msg{max-width:82%;padding:12px 16px;border-radius:12px;font-size:.94rem;line-height:1.55;white-space:pre-wrap}
 .msg.user{align-self:flex-end;background:var(--bordo);color:#fff;border-bottom-right-radius:3px}
 .msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:3px}
 .msg.system{align-self:center;background:transparent;color:var(--muted);font-size:.82rem;text-align:center;max-width:100%}
+.appt-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.appt-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:4px;
+  font-weight:600;font-size:.9rem;color:#fff!important;transition:.2s}
+.appt-btn.mail{background:var(--bordo)} .appt-btn.mail:hover{background:var(--bordo-dark)}
+.appt-btn.wa{background:#25925a} .appt-btn.wa:hover{background:#1d7448}
+.appt-restart{display:inline-block;margin-top:6px;font-size:.82rem;font-weight:600;color:var(--yesil);cursor:pointer;text-decoration:underline}
 .chat-input{display:flex;gap:10px;padding:16px 18px;border-top:1px solid var(--line);background:#fff}
 .chat-input textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:4px;padding:11px 14px;
   font-family:var(--sans);font-size:.94rem;line-height:1.4;max-height:120px;outline:none}
@@ -180,15 +188,18 @@ section{padding:88px 0}
 footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 .foot .brand b{color:#fff}
+.foot .brand .mark{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--yesil)}
 .foot small{color:#9A8E82;font-size:.82rem}
 
 @media(max-width:900px){
   .about,.contact{grid-template-columns:1fr;gap:32px}
-  .grid,.team,.stats{grid-template-columns:repeat(2,1fr)}
+  .grid,.stats{grid-template-columns:repeat(2,1fr)}
+  .team .member{width:calc(50% - 46px)}
   nav ul{display:none} .burger{display:block}
 }
 @media(max-width:560px){
-  .grid,.team,.stats{grid-template-columns:1fr}
+  .grid,.stats{grid-template-columns:1fr}
+  .team .member{width:100%}
   section{padding:64px 0} .hero .wrap{padding:80px 24px 88px}
   .modal-head{flex-direction:column;text-align:center}
 }
@@ -209,7 +220,7 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
           <li><a href="#alanlar" data-i18n="nav_areas">Çalışma Alanları</a></li>
           <li><a href="#takim" data-i18n="nav_team">Takımımız</a></li>
           <li><a href="#iletisim" data-i18n="nav_contact">İletişim</a></li>
-          <li><a class="nav-cta" href="#avukata-sor" data-i18n="nav_ask">Avukata Sor</a></li>
+          <li><a class="nav-cta" href="#randevu" data-i18n="nav_appt">Randevu Al</a></li>
         </ul>
       </nav>
       <div class="lang-switch">
@@ -242,8 +253,8 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
     <p class="quote" data-i18n="hero_quote">“Hakkın olduğu yerde, adaletin yanında.”</p>
     <p class="attrib">— Av. Ahmet Yasin YILDIZ</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#avukata-sor" data-i18n="hero_btn_ask">Avukata Sor</a>
-      <a class="btn btn-ghost" href="#iletisim" data-i18n="hero_btn_appt">Randevu Al</a>
+      <a class="btn btn-primary" href="#randevu" data-i18n="hero_btn_appt">Randevu Al</a>
+      <a class="btn btn-ghost" href="#iletisim" data-i18n="hero_btn_contact">Bize Ulaşın</a>
     </div>
   </div>
 </section>
@@ -254,7 +265,7 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
     <div class="photo"><img src="img/anaekran2.jpg" alt="Büro" style="width:100%;height:100%;object-fit:cover"></div>
     <div>
       <span class="eyebrow" data-i18n="about_eyebrow">Hakkımızda</span>
-      <h2 data-i18n="about_title">YILDIZ Hukuk Bürosu</h2>
+      <h2 data-i18n="about_title">YILDIZ&ŞAHİN Hukuk Bürosu</h2>
       <p class="lead" data-i18n="about_lead">Hukuk büromuz, müvekkillerimizin hak ve menfaatlerini gözeterek güvenilir, çözüm odaklı ve etkin hukuki hizmet sunmayı amaçlamaktadır.</p>
       <p data-i18n="about_p">Hukuk büromuz, hukukun üstünlüğü ve adalet ilkeleri doğrultusunda, müvekkillerine güvenilir ve nitelikli hukuki hizmet sunmak amacıyla kurulmuştur. Deneyim, bilgi birikimi ve güncel hukuk anlayışını bir araya getirerek her dosyaya titizlikle yaklaşmakta; müvekkillerimizin ihtiyaçlarını doğru analiz ederek etkili ve çözüm odaklı hukuki yollar geliştirmekteyiz. Şeffaf iletişim, güven ve mesleki etik ilkelerini temel alarak uzun vadeli ve sağlam bir vekâlet ilişkisi kurmayı hedefliyoruz.</p>
       <ul>
@@ -287,8 +298,8 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
 <section id="istatistik">
   <div class="wrap stats">
     <div class="stat"><div class="num">10+</div><div class="lbl" data-i18n="stat1_l">Yıllık Deneyim</div></div>
-    <div class="stat"><div class="num">500+</div><div class="lbl" data-i18n="stat2_l">Sonuçlanan Dosya</div></div>
-    <div class="stat"><div class="num">350+</div><div class="lbl" data-i18n="stat3_l">Mutlu Müvekkil</div></div>
+    <div class="stat"><div class="num">50000+</div><div class="lbl" data-i18n="stat2_l">Saatlik Çalışma</div></div>
+    <div class="stat"><div class="num">7/24</div><div class="lbl" data-i18n="stat3_l">Hızlı Hukuki Destek</div></div>
     <div class="stat"><div class="num">8</div><div class="lbl" data-i18n="stat4_l">Uzmanlık Alanı</div></div>
   </div>
 </section>
@@ -309,67 +320,35 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
         <div class="avatar"><img src="img/berkant.jpg" alt="Kemal Berkant Şahin" style="width:100%;height:100%;object-fit:cover"></div>
         <div class="info"><h3>Kemal Berkant Şahin</h3><span class="role" data-i18n="role_lawyer">Avukat</span><span class="cv-link" data-i18n="cv_view">Özgeçmişi Gör →</span></div>
       </div>
-      <div class="member" onclick="openCV('cv-ozge','Berkant Şahin','img/ozge.jpg')">
-        <div class="avatar"><img src="img/ozge.jpg" alt="Berkant Şahin" style="width:100%;height:100%;object-fit:cover"></div>
-        <div class="info"><h3>Özge Seren Sürgit</h3><span class="role" data-i18n="role_lawyer">Avukat</span><span class="cv-link" data-i18n="cv_view">Özgeçmişi Gör →</span></div>
-      </div>
-      <div class="member" onclick="openCV('cv-ceren','Ahmet Yıldız','img/ceren.jpg')">
-        <div class="avatar">[ Fotoğraf ]</div>
-        <div class="info"><h3>Ahmet Yıldız</h3><span class="role" data-i18n="role_lawyer">Avukat</span><span class="cv-link" data-i18n="cv_view">Özgeçmişi Gör →</span></div>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ ÖZGEÇMİŞ VERİLERİ (gizli) — içeriği siz doldurun ═══════ -->
+<!-- ═══════ ÖZGEÇMİŞ VERİLERİ (gizli) ═══════ -->
 <div style="display:none">
   <div id="cv-yasin">
     <h4>Eğitim</h4>
-    <ul><li>[Üniversite / Fakülte — Yıl]</li><li>[Yüksek lisans vb. — Yıl]</li></ul>
+    <ul><li>Ankara Üniversitesi Hukuk Fakültesi - 2016</li><li>Lisans</li></ul>
     <h4>Deneyim</h4>
-    <ul><li>[Görev / Kurum — Yıl aralığı]</li><li>[Görev / Kurum — Yıl aralığı]</li></ul>
+    <ul><li>Stajyer Avukat / Aşıkoğlu Hukuk Bürosu - 2016-2017</li><li>Avukat / Aşıkoğlu Hukuk Bürosu - 2017-2026</li></ul>
     <h4>Uzmanlık Alanları</h4>
-    <p>[Ceza hukuku, aile hukuku vb.]</p>
+    <p>Ceza hukuku, Aile Hukuku</p>
     <h4>Diller</h4>
-    <p>[Türkçe, İngilizce vb.]</p>
+    <p>Türkçe, İngilizce</p>
     <h4>Baro / Sicil</h4>
-    <p>[Alanya Barosu — Sicil No: ...]</p>
+    <p>Alanya Barosu — Sicil No: 11111</p>
   </div>
   <div id="cv-berkant">
     <h4>Eğitim</h4>
-    <ul><li>[Üniversite / Fakülte — Yıl]</li></ul>
+    <ul><li>Erzincan Üniversitesi Hukuk Fakültesi - 2016</li><li>Lisans</li></ul>
     <h4>Deneyim</h4>
-    <ul><li>[Görev / Kurum — Yıl aralığı]</li></ul>
+    <ul><li>Avukat / Aşıkoğlu Hukuk Bürosu - 2017-2026</li></ul>
     <h4>Uzmanlık Alanları</h4>
-    <p>[...]</p>
+    <p>Medeni hukuk, Aile Hukuku</p>
     <h4>Diller</h4>
-    <p>[...]</p>
+    <p>Türkçe, İngilizce</p>
     <h4>Baro / Sicil</h4>
-    <p>[...]</p>
-  </div>
-  <div id="cv-ozge">
-    <h4>Eğitim</h4>
-    <ul><li>[Üniversite / Fakülte — Yıl]</li></ul>
-    <h4>Deneyim</h4>
-    <ul><li>[Görev / Kurum — Yıl aralığı]</li></ul>
-    <h4>Uzmanlık Alanları</h4>
-    <p>[...]</p>
-    <h4>Diller</h4>
-    <p>[...]</p>
-    <h4>Baro / Sicil</h4>
-    <p>[...]</p>
-  </div>
-  <div id="cv-ceren">
-    <h4>Eğitim</h4>
-    <ul><li>[Üniversite / Fakülte — Yıl]</li></ul>
-    <h4>Deneyim</h4>
-    <ul><li>[Görev / Kurum — Yıl aralığı]</li></ul>
-    <h4>Uzmanlık Alanları</h4>
-    <p>[...]</p>
-    <h4>Diller</h4>
-    <p>[...]</p>
-    <h4>Baro / Sicil</h4>
-    <p>[...]</p>
+    <p>Alanya Barosu — Sicil No: 22222</p>
   </div>
 </div>
 
@@ -388,25 +367,24 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
   </div>
 </div>
 
-<section id="avukata-sor">
+<!-- ═══════ RANDEVU CHATBOT ═══════ -->
+<section id="randevu">
   <div class="wrap">
     <div class="sec-head" style="margin:0 auto 40px;text-align:center">
-      <span class="eyebrow" data-i18n="ask_eyebrow">Yapay Zekâ Destekli</span>
-      <h2 data-i18n="ask_title">Avukata Sor</h2>
-      <p data-i18n="ask_intro">Hukuki sorunuzu yazın, yapay zekâ asistanımız genel bilgi versin.</p>
+      <span class="eyebrow" data-i18n="appt_eyebrow">Randevu</span>
+      <h2 data-i18n="appt_title">Randevu Al</h2>
+      <p data-i18n="appt_intro">Birkaç kısa soruyla randevu talebinizi oluşturun; ardından e-posta veya WhatsApp ile bize iletin.</p>
     </div>
 
     <div class="chat">
-      <div class="chat-head"><span class="dot"></span><b data-i18n="chat_head">Hukuk Asistanı</b></div>
-      <div class="chat-log" id="chatLog">
-        <div class="msg bot" data-i18n="chat_greeting">Merhaba, ben Yıldız&Şahin yapay zekâ asistanıyım. Hukuki konunuzu kısaca yazın, size genel bilgi vereyim.</div>
-      </div>
+      <div class="chat-head"><span class="dot"></span><b data-i18n="appt_chat_head">Randevu Asistanı</b></div>
+      <div class="chat-log" id="chatLog"></div>
       <div class="chat-input">
-        <textarea id="chatInput" rows="1" data-i18n-ph="chat_ph" placeholder="Sorunuzu yazın..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
-        <button id="sendBtn" onclick="sendMessage()" data-i18n="chat_send">Gönder</button>
+        <textarea id="chatInput" rows="1" data-i18n-ph="appt_ph" placeholder="Yanıtınızı yazın..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
+        <button id="sendBtn" onclick="sendMessage()" data-i18n="appt_send">Gönder</button>
       </div>
     </div>
-    <p class="disclaimer" data-i18n="disclaimer">Bu asistan genel bilgilendirme amaçlıdır ve avukatlık hizmeti / resmî hukuki görüş yerine geçmez. Kesin sonuç için lütfen büromuzla iletişime geçin.</p>
+    <p class="disclaimer" data-i18n="appt_disc">Bu form yalnızca randevu talebi oluşturur; kesin randevu, tarafımızca onaylandığında geçerlidir.</p>
   </div>
 </section>
 
@@ -418,10 +396,10 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
     </div>
     <div class="contact">
       <div class="contact-info">
-        <div class="ci-item"><div class="k" data-i18n="c_address">Adres</div><div class="v">[Adres buraya gelecek]</div></div>
-        <div class="ci-item"><div class="k" data-i18n="c_phone">Telefon</div><div class="v">[+90 555555555]</div></div>
+        <div class="ci-item"><div class="k" data-i18n="c_address">Adres</div><div class="v">Hasbahçe Mah. Alanya/ANTALYA</div></div>
+        <div class="ci-item"><div class="k" data-i18n="c_phone">Telefon</div><div class="v">+90 555555555</div></div>
         <div class="ci-item"><div class="k" data-i18n="c_email">E-Posta</div><div class="v">iletisim@yildizsahinhukuk.com</div></div>
-        <div class="ci-item"><div class="k" data-i18n="c_hours">Çalışma Saatleri</div><div class="v">[Pzt–Cmt 09:00–18:00]</div></div>
+        <div class="ci-item"><div class="k" data-i18n="c_hours">Çalışma Saatleri</div><div class="v">Pzt–Cmt 09:00–18:00</div></div>
       </div>
       <div class="map" style="padding:0;overflow:hidden"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48907.82912696085!2d32.66165129999999!3d39.99193050000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d336e900dc352b%3A0xc60911f02aae1dbc!2sOYAK%20G%C3%B6ksupark!5e0!3m2!1str!2str!4v1787916727683!5m2!1str!2str" style="width:100%;height:100%;border:0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     </div>
@@ -431,7 +409,7 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
 <footer>
   <div class="wrap foot">
     <div class="brand">
-      <span class="mark">[ ]</span>
+      <img class="mark" src="img/yasin_sahin_hukuk_amblemi1.jpeg" alt="Logo">
       <span><b>Yıldız&Şahin</b><span data-i18n="brand_sub">Hukuk Bürosu</span></span>
     </div>
     <small>© <span id="yil"></span> Yıldız&Şahin. <span data-i18n="footer_rights">Tüm hakları saklıdır.</span></small>
@@ -440,30 +418,23 @@ footer{background:var(--ink);color:#C9BEB2;padding:46px 0 30px}
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   GEMINI AYARLARI — "AVUKATA SOR" BÖLÜMÜ
-   API anahtarınızı aşağıya yazın: https://aistudio.google.com/apikey
-   DİKKAT: Bu sayfa GitHub'da herkese açık olduğundan anahtar görünür.
-   Mutlaka Google AI Studio'da anahtara "HTTP yönlendiren (site) kısıtı"
-   ekleyin ki sadece kendi alan adınızdan çalışsın.
+   RANDEVU AYARLARI — buraya kendi bilgilerinizi yazın
+   OFFICE_EMAIL : randevu taleplerinin gideceği e-posta
+   WHATSAPP_NO  : ülke koduyla, + ve boşluk olmadan (örn. 905321234567)
 ════════════════════════════════════════════════════════════════ */
-const GEMINI_API_KEY = "BURAYA_API_ANAHTARINIZI_YAZIN";
-const GEMINI_MODEL   = "gemini-2.5-flash";
-const SYSTEM_PROMPT  =
-  "Sen bir Türk hukuk bürosunun yapay zekâ asistanısın. Kullanıcılara Türkçe, " +
-  "anlaşılır ve genel hukuki bilgilendirme yaparsın. Kesin hukuki görüş veya " +
-  "avukatlık hizmeti vermediğini, karmaşık konularda büroyla iletişime geçilmesi " +
-  "gerektiğini uygun yerlerde belirtirsin. Kısa ve net cevap ver.";
+const OFFICE_EMAIL = "ozgeserens@gmail.com";
+const WHATSAPP_NO  = "905554107420";
 
 const I18N = {
   tr:{
     brand_sub:"Hukuk Bürosu",
     nav_about:"Hakkımızda", nav_areas:"Çalışma Alanları", nav_team:"Takımımız",
-    nav_contact:"İletişim", nav_ask:"Avukata Sor",
+    nav_contact:"İletişim", nav_appt:"Randevu Al",
     hero_eyebrow:"Alanya · Hukuk Bürosu",
     hero_title:"Adalet İçin Güçlü Çözüm, Güvenilir Hukuk",
     hero_quote:"“Hakkın olduğu yerde, adaletin yanında.”",
-    hero_btn_ask:"Avukata Sor", hero_btn_appt:"Randevu Al",
-    about_eyebrow:"Hakkımızda", about_title:"YILDIZ Hukuk Bürosu",
+    hero_btn_appt:"Randevu Al", hero_btn_contact:"Bize Ulaşın",
+    about_eyebrow:"Hakkımızda", about_title:"YILDIZ&ŞAHİN Hukuk Bürosu",
     about_lead:"Hukuk büromuz, müvekkillerimizin hak ve menfaatlerini gözeterek güvenilir, çözüm odaklı ve etkin hukuki hizmet sunmayı amaçlamaktadır.",
     about_p:"Hukuk büromuz, hukukun üstünlüğü ve adalet ilkeleri doğrultusunda, müvekkillerine güvenilir ve nitelikli hukuki hizmet sunmak amacıyla kurulmuştur. Deneyim, bilgi birikimi ve güncel hukuk anlayışını bir araya getirerek her dosyaya titizlikle yaklaşmakta; müvekkillerimizin ihtiyaçlarını doğru analiz ederek etkili ve çözüm odaklı hukuki yollar geliştirmekteyiz. Şeffaf iletişim, güven ve mesleki etik ilkelerini temel alarak uzun vadeli ve sağlam bir vekâlet ilişkisi kurmayı hedefliyoruz.",
     about_li1:"Güvenilirlik", about_li2:"Deneyim", about_li3:"Uzmanlık",
@@ -475,16 +446,24 @@ const I18N = {
     area4_t:"Ticaret Hukuku", area4_d:"Şirketler, sözleşmeler ve ticari uyuşmazlıklarda kurumsal ve bireysel müvekkillere hizmet veririz.",
     area5_t:"Gayrimenkul Hukuku", area5_d:"Tapu, kira, kat mülkiyeti ve gayrimenkul uyuşmazlıklarında hukuki güvence sağlarız.",
     area6_t:"Miras Hukuku", area6_d:"Mirasın paylaşımı, veraset, tenkis ve mirasçılık davalarında haklarınızı koruruz.",
-    stat1_l:"Yıllık Deneyim", stat2_l:"Sonuçlanan Dosya", stat3_l:"Mutlu Müvekkil", stat4_l:"Uzmanlık Alanı",
+    stat1_l:"Yıllık Deneyim", stat2_l:"Çalışma Saati", stat3_l:"Hızlı Hukuki Destek", stat4_l:"Uzmanlık Alanı",
     team_eyebrow:"Ekip", team_title:"Takımımız",
     team_intro:"Alanında uzman, deneyimli avukatlardan oluşan ekibimiz; her dosyaya özen ve titizlikle yaklaşır, müvekkillerimizin haklarını kararlılıkla savunur.",
     role_lawyer:"Avukat", cv_view:"Özgeçmişi Gör →",
-    ask_eyebrow:"Yapay Zekâ Destekli", ask_title:"Avukata Sor",
-    ask_intro:"Hukuki sorunuzu yazın, yapay zekâ asistanımız genel bilgi versin.",
-    chat_head:"Hukuk Asistanı",
-    chat_greeting:"Merhaba, ben Yıldız&Şahin yapay zekâ asistanıyım. Hukuki konunuzu kısaca yazın, size genel bilgi vereyim.",
-    chat_ph:"Sorunuzu yazın...", chat_send:"Gönder",
-    disclaimer:"Bu asistan genel bilgilendirme amaçlıdır ve avukatlık hizmeti / resmî hukuki görüş yerine geçmez. Kesin sonuç için lütfen büromuzla iletişime geçin.",
+    appt_eyebrow:"Randevu", appt_title:"Randevu Al",
+    appt_intro:"Birkaç kısa soruyla randevu talebinizi oluşturun; ardından e-posta veya WhatsApp ile bize iletin.",
+    appt_chat_head:"Randevu Asistanı",
+    appt_greeting:"Merhaba! Randevu talebinizi oluşturalım. Lütfen adınızı ve soyadınızı yazın.",
+    q_phone:"Teşekkürler. Telefon numaranızı yazar mısınız?",
+    q_subject:"Randevunun konusu nedir? (kısaca)",
+    q_datetime:"Tercih ettiğiniz tarih ve saati yazın (örn. 12 Haziran, öğleden sonra).",
+    summary_intro:"Randevu talebiniz hazır. Aşağıdaki butonlarla bize iletebilirsiniz:",
+    f_name:"Ad Soyad", f_phone:"Telefon", f_subject:"Konu", f_datetime:"Tarih/Saat",
+    btn_email:"✉ E-posta ile Gönder", btn_whatsapp:"⟢ WhatsApp ile Gönder",
+    mail_subject:"Randevu Talebi — Yıldız&Şahin Hukuk",
+    restart:"Yeniden başlat",
+    appt_ph:"Yanıtınızı yazın...", appt_send:"Gönder",
+    appt_disc:"Bu form yalnızca randevu talebi oluşturur; kesin randevu, tarafımızca onaylandığında geçerlidir.",
     contact_eyebrow:"İletişim", contact_title:"Bize Ulaşın",
     c_address:"Adres", c_phone:"Telefon", c_email:"E-Posta", c_hours:"Çalışma Saatleri",
     footer_rights:"Tüm hakları saklıdır."
@@ -492,12 +471,12 @@ const I18N = {
   en:{
     brand_sub:"Law Firm",
     nav_about:"About Us", nav_areas:"Practice Areas", nav_team:"Our Team",
-    nav_contact:"Contact", nav_ask:"Ask a Lawyer",
+    nav_contact:"Contact", nav_appt:"Book Appointment",
     hero_eyebrow:"Alanya · Law Firm",
     hero_title:"Strong Solutions for Justice, Reliable Law",
     hero_quote:"“Where there is a right, justice stands beside it.”",
-    hero_btn_ask:"Ask a Lawyer", hero_btn_appt:"Book an Appointment",
-    about_eyebrow:"About Us", about_title:"YILDIZ Law Firm",
+    hero_btn_appt:"Book Appointment", hero_btn_contact:"Contact Us",
+    about_eyebrow:"About Us", about_title:"YILDIZ&ŞAHİN Law Firm",
     about_lead:"Our firm aims to provide reliable, solution-oriented and effective legal services while always safeguarding our clients' rights and interests.",
     about_p:"Our law firm was founded to provide clients with reliable and high-quality legal services in line with the rule of law and the principles of justice. Combining experience, knowledge and a contemporary understanding of law, we approach every case with great care; by correctly analysing our clients' needs, we develop effective and solution-oriented legal strategies. Built on transparent communication, trust and professional ethics, we aim to establish a long-term and solid attorney–client relationship.",
     about_li1:"Reliability", about_li2:"Experience", about_li3:"Expertise",
@@ -513,12 +492,20 @@ const I18N = {
     team_eyebrow:"Team", team_title:"Our Team",
     team_intro:"Our team of expert, experienced lawyers approaches every case with care and diligence, defending our clients' rights with determination.",
     role_lawyer:"Lawyer", cv_view:"View CV →",
-    ask_eyebrow:"AI-Powered", ask_title:"Ask a Lawyer",
-    ask_intro:"Type your legal question and our AI assistant will give general information.",
-    chat_head:"Legal Assistant",
-    chat_greeting:"Hello, I'm the Yıldız&Şahin AI assistant. Briefly describe your legal matter and I'll give you general information.",
-    chat_ph:"Type your question...", chat_send:"Send",
-    disclaimer:"This assistant is for general information only and does not replace legal representation or formal legal advice. For a definitive result, please contact our office.",
+    appt_eyebrow:"Appointment", appt_title:"Book an Appointment",
+    appt_intro:"Create your appointment request with a few short questions, then send it to us by email or WhatsApp.",
+    appt_chat_head:"Appointment Assistant",
+    appt_greeting:"Hello! Let's create your appointment request. Please type your full name.",
+    q_phone:"Thank you. Could you write your phone number?",
+    q_subject:"What is the subject of the appointment? (briefly)",
+    q_datetime:"Please write your preferred date and time (e.g. June 12, afternoon).",
+    summary_intro:"Your appointment request is ready. You can send it to us using the buttons below:",
+    f_name:"Full Name", f_phone:"Phone", f_subject:"Subject", f_datetime:"Date/Time",
+    btn_email:"✉ Send by Email", btn_whatsapp:"⟢ Send via WhatsApp",
+    mail_subject:"Appointment Request — Yıldız&Şahin Law",
+    restart:"Start over",
+    appt_ph:"Type your answer...", appt_send:"Send",
+    appt_disc:"This form only creates an appointment request; the appointment is confirmed once approved by our office.",
     contact_eyebrow:"Contact", contact_title:"Get in Touch",
     c_address:"Address", c_phone:"Phone", c_email:"Email", c_hours:"Working Hours",
     footer_rights:"All rights reserved."
@@ -526,12 +513,12 @@ const I18N = {
   ru:{
     brand_sub:"Юридическая фирма",
     nav_about:"О нас", nav_areas:"Области практики", nav_team:"Наша команда",
-    nav_contact:"Контакты", nav_ask:"Спросить юриста",
+    nav_contact:"Контакты", nav_appt:"Записаться",
     hero_eyebrow:"Аланья · Юридическая фирма",
     hero_title:"Сильные решения ради справедливости, надёжное право",
     hero_quote:"«Там, где есть право, рядом — справедливость.»",
-    hero_btn_ask:"Спросить юриста", hero_btn_appt:"Записаться на приём",
-    about_eyebrow:"О нас", about_title:"Юридическая фирма YILDIZ",
+    hero_btn_appt:"Записаться", hero_btn_contact:"Связаться",
+    about_eyebrow:"О нас", about_title:"Юридическая фирма YILDIZ&ŞAHİN",
     about_lead:"Наша фирма стремится предоставлять надёжные, ориентированные на результат и эффективные юридические услуги, защищая права и интересы наших клиентов.",
     about_p:"Наша юридическая фирма была основана для предоставления клиентам надёжных и качественных юридических услуг в соответствии с принципами верховенства права и справедливости. Сочетая опыт, знания и современное понимание права, мы подходим к каждому делу с особой тщательностью; правильно анализируя потребности клиентов, мы разрабатываем эффективные и ориентированные на результат правовые стратегии. Основываясь на прозрачном общении, доверии и профессиональной этике, мы стремимся выстроить долгосрочные и прочные отношения между адвокатом и клиентом.",
     about_li1:"Надёжность", about_li2:"Опыт", about_li3:"Экспертиза",
@@ -547,19 +534,30 @@ const I18N = {
     team_eyebrow:"Команда", team_title:"Наша команда",
     team_intro:"Наша команда опытных юристов-экспертов подходит к каждому делу внимательно и тщательно, решительно защищая права наших клиентов.",
     role_lawyer:"Адвокат", cv_view:"Смотреть резюме →",
-    ask_eyebrow:"На основе ИИ", ask_title:"Спросить юриста",
-    ask_intro:"Напишите свой юридический вопрос, и наш ИИ-ассистент даст общую информацию.",
-    chat_head:"Юридический ассистент",
-    chat_greeting:"Здравствуйте, я ИИ-ассистент Yıldız&Şahin. Кратко опишите ваш юридический вопрос, и я дам общую информацию.",
-    chat_ph:"Введите ваш вопрос...", chat_send:"Отправить",
-    disclaimer:"Этот ассистент предназначен только для общей информации и не заменяет юридического представительства или официальной консультации. Для точного результата обратитесь в наш офис.",
+    appt_eyebrow:"Запись", appt_title:"Записаться на приём",
+    appt_intro:"Создайте заявку на приём, ответив на несколько коротких вопросов, затем отправьте её нам по электронной почте или в WhatsApp.",
+    appt_chat_head:"Ассистент записи",
+    appt_greeting:"Здравствуйте! Давайте оформим вашу заявку на приём. Пожалуйста, напишите ваши имя и фамилию.",
+    q_phone:"Спасибо. Напишите, пожалуйста, ваш номер телефона.",
+    q_subject:"Какова тема приёма? (кратко)",
+    q_datetime:"Укажите предпочитаемые дату и время (например, 12 июня, после обеда).",
+    summary_intro:"Ваша заявка готова. Вы можете отправить её нам с помощью кнопок ниже:",
+    f_name:"Имя Фамилия", f_phone:"Телефон", f_subject:"Тема", f_datetime:"Дата/Время",
+    btn_email:"✉ Отправить по e-mail", btn_whatsapp:"⟢ Отправить в WhatsApp",
+    mail_subject:"Заявка на приём — Yıldız&Şahin",
+    restart:"Начать заново",
+    appt_ph:"Введите ответ...", appt_send:"Отправить",
+    appt_disc:"Эта форма только создаёт заявку; приём подтверждается после одобрения нашим офисом.",
     contact_eyebrow:"Контакты", contact_title:"Свяжитесь с нами",
     c_address:"Адрес", c_phone:"Телефон", c_email:"Эл. почта", c_hours:"Часы работы",
     footer_rights:"Все права защищены."
   }
 };
 
+let currentLang = 'tr';
+
 function setLang(lang){
+  currentLang = lang;
   const dict = I18N[lang] || I18N.tr;
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
@@ -573,6 +571,7 @@ function setLang(lang){
   document.querySelectorAll('.lang-switch button').forEach(b=>
     b.classList.toggle('active', b.getAttribute('data-lang')===lang));
   try{ localStorage.setItem('lang', lang); }catch(e){}
+  if(document.getElementById('chatLog')) startChat();
 }
 
 /* Özgeçmiş modal */
@@ -607,11 +606,14 @@ if(totalSlides>1) setInterval(()=>moveSlide(1), 5000);
 
 document.getElementById('yil').textContent = new Date().getFullYear();
 
-/* Chat — Gemini'ye doğrudan (tarayıcıdan) */
+/* ═══════ RANDEVU CHATBOT (yapay zekâsız) ═══════ */
 const log   = document.getElementById('chatLog');
 const input = document.getElementById('chatInput');
 const btn   = document.getElementById('sendBtn');
-const history = [];
+
+const flow = ['name','phone','subject','datetime'];
+let step = 0;
+const answers = {};
 
 function addMsg(text, cls){
   const el = document.createElement('div');
@@ -622,50 +624,63 @@ function addMsg(text, cls){
   return el;
 }
 
+function botAsk(){
+  const d = I18N[currentLang];
+  const keys = {name:'appt_greeting', phone:'q_phone', subject:'q_subject', datetime:'q_datetime'};
+  addMsg(d[keys[flow[step]]], 'bot');
+}
+
+function startChat(){
+  log.innerHTML = '';
+  step = 0;
+  for(const k in answers) delete answers[k];
+  input.disabled = false; btn.disabled = false;
+  botAsk();
+}
+
 input.addEventListener('input', () => {
   input.style.height = 'auto';
   input.style.height = Math.min(input.scrollHeight, 120) + 'px';
 });
 
-async function sendMessage(){
+function sendMessage(){
   const text = input.value.trim();
-  if(!text) return;
-
-  if(GEMINI_API_KEY === "BURAYA_API_ANAHTARINIZI_YAZIN"){
-    addMsg("⚙️ Gemini API anahtarı henüz eklenmemiş. index.html içindeki GEMINI_API_KEY değerini düzenleyin.", "system");
-    return;
-  }
-
+  if(!text || input.disabled) return;
   addMsg(text, 'user');
-  history.push({ role:'user', parts:[{ text }] });
+  answers[flow[step]] = text;
   input.value=''; input.style.height='auto';
-  btn.disabled = true;
-  const typing = addMsg('...', 'bot');
+  step++;
+  if(step < flow.length){ botAsk(); }
+  else { finishChat(); }
+}
 
-  try{
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json' },
-        body: JSON.stringify({
-          systemInstruction:{ parts:[{ text: SYSTEM_PROMPT }] },
-          contents: history
-        })
-      }
-    );
-    const data = await res.json();
-    if(data.error){ throw new Error(data.error.message || 'API hatası'); }
-    const reply = data?.candidates?.[0]?.content?.parts?.map(p=>p.text).join('') || 'Yanıt alınamadı.';
-    typing.textContent = reply;
-    history.push({ role:'model', parts:[{ text: reply }] });
-  }catch(err){
-    typing.remove();
-    addMsg('Bir hata oluştu: ' + err.message, 'system');
-  }finally{
-    btn.disabled = false;
-    input.focus();
-  }
+function finishChat(){
+  const d = I18N[currentLang];
+  const summary =
+    d.f_name + ': ' + answers.name + '\n' +
+    d.f_phone + ': ' + answers.phone + '\n' +
+    d.f_subject + ': ' + answers.subject + '\n' +
+    d.f_datetime + ': ' + answers.datetime;
+
+  addMsg(d.summary_intro + '\n\n' + summary, 'bot');
+
+  const body = encodeURIComponent(d.mail_subject + '\n\n' + summary);
+  const subj = encodeURIComponent(d.mail_subject);
+  const mailto = 'mailto:' + OFFICE_EMAIL + '?subject=' + subj + '&body=' + body;
+  const wa = 'https://wa.me/' + WHATSAPP_NO + '?text=' + body;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'msg bot';
+  wrap.innerHTML =
+    '<div class="appt-actions">' +
+      '<a class="appt-btn mail" href="' + mailto + '">' + d.btn_email + '</a>' +
+      '<a class="appt-btn wa" href="' + wa + '" target="_blank" rel="noopener">' + d.btn_whatsapp + '</a>' +
+    '</div>' +
+    '<span class="appt-restart" onclick="startChat()">' + d.restart + '</span>';
+  log.appendChild(wrap);
+  log.scrollTop = log.scrollHeight;
+
+  input.disabled = true; btn.disabled = true;
 }
 
 let startLang = 'tr';
